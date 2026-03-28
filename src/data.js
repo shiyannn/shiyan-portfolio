@@ -3,7 +3,7 @@ export const data = {
   location: "Abella, Naga City, Camarines Sur",
   title: "Student | Aspiring Developer",
   email: "scroblas@gbox.ncf.edu.ph",
-  github: "https://github.com/shiane",
+  github: "https://github.com/shiyannn",
   about: `I'm a guy who wants to learn how to become successful in life and to find Inner peace :>> 
   Currently a 3rd year college student at Naga College Foundation Inc.,
    passionate about building meaningful digital experiences through code. I believe in growth, resilience, and creating things that make a difference.`,
@@ -27,7 +27,7 @@ export const data = {
   education: [
     {
       year: "2022 – Present",
-      degree: "Bachelor of Science in Information Technology",
+      degree: "Bachelor of Science in Information System",
       school: "Naga College Foundation Inc. (NCF)",
       highlights: ["3rd Year College Student"],
     },
