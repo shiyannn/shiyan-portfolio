@@ -1,53 +1,64 @@
 import { useState } from "react"
 import { SectionLabel } from "./About"
 
-const initialCerts = [
-  { title: "Dean's Lister 1st Sem", image: null },
-  { title: "Dean's Lister 2nd Sem", image: null },
-  { title: "Certificate 3", image: null },
+import cert1 from "../assets/certs/DL.jpg"
+import cert2 from "../assets/certs/DL.jpg"
+// import cert3 from "../assets/certs/cert3.jpg"
+
+const certificates = [
+  { title: "Certificate 1", image: cert1 },
+  { title: "Certificate 2", image: cert2 },
+  // { title: "Certificate 3", image: cert3 },
 ]
 
-function CertSlot({ cert, onUpload, darkMode }) {
-  return (
-    <label className={`relative cursor-pointer group rounded-xl border border-dashed transition-colors overflow-hidden min-h-[140px] flex flex-col items-center justify-center ${darkMode ? "bg-zinc-800 border-zinc-600 hover:border-emerald-500" : "bg-gray-50 border-gray-300 hover:border-emerald-500"}`}>
-      <input type="file" accept="image/*" className="hidden" onChange={onUpload} />
-      {cert.image ? (
-        <>
-          <img src={cert.image} alt={cert.title} className="w-full h-full object-cover rounded-xl absolute inset-0" />
-          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-xl">
-            <span className="text-xs text-white font-medium">Click to replace</span>
-          </div>
-        </>
-      ) : (
-        <div className="flex flex-col items-center justify-center p-6 text-center">
-          <span className="text-2xl mb-2 group-hover:scale-110 transition-transform select-none">📜</span>
-          <p className={`text-xs font-medium ${darkMode ? "text-zinc-400" : "text-zinc-500"}`}>{cert.title}</p>
-          <p className={`text-xs mt-1 ${darkMode ? "text-zinc-600" : "text-gray-400"}`}>Click to upload</p>
-        </div>
-      )}
-    </label>
-  )
-}
-
 export default function Certificates({ darkMode }) {
-  const [certs, setCerts] = useState(initialCerts)
-
-  const handleUpload = (index, e) => {
-    const file = e.target.files[0]
-    if (!file) return
-    const url = URL.createObjectURL(file)
-    setCerts((prev) => prev.map((c, i) => (i === index ? { ...c, image: url } : c)))
-  }
+  const [selected, setSelected] = useState(null)
 
   return (
     <div className={`rounded-2xl p-5 border ${darkMode ? "bg-zinc-900 border-zinc-800" : "bg-white border-gray-200"}`}>
       <SectionLabel emoji="🏅" label="Certificate Gallery" darkMode={darkMode} />
+      
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {certs.map((cert, i) => (
-          <CertSlot key={i} cert={cert} onUpload={(e) => handleUpload(i, e)} darkMode={darkMode} />
+        {certificates.map((cert, i) => (
+          <div
+            key={i}
+            onClick={() => setSelected(cert)}
+            className={`rounded-xl border overflow-hidden cursor-pointer hover:scale-105 transition-transform ${darkMode ? "border-zinc-700" : "border-gray-200"}`}
+          >
+            <img
+              src={cert.image}
+              alt={cert.title}
+              className="w-full h-32 object-cover"
+            />
+            <p className={`text-xs text-center py-2 ${darkMode ? "text-zinc-400" : "text-zinc-500"}`}>
+              {cert.title}
+            </p>
+          </div>
         ))}
       </div>
-      
+
+      {/* Lightbox */}
+      {selected && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelected(null)}
+        >
+          <div className="relative max-w-3xl w-full" onClick={e => e.stopPropagation()}>
+            <button
+              onClick={() => setSelected(null)}
+              className="absolute -top-10 right-0 text-white text-sm font-medium hover:text-zinc-300"
+            >
+              ✕ Close
+            </button>
+            <img
+              src={selected.image}
+              alt={selected.title}
+              className="w-full rounded-xl object-contain max-h-[80vh]"
+            />
+            <p className="text-center text-white text-sm mt-3">{selected.title}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
