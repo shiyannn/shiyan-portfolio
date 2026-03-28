@@ -50,7 +50,6 @@ export default function Header({ darkMode, setDarkMode }) {
 
         <div className="flex items-center gap-2 ml-auto">
         <span className="text-xs">{darkMode ? "🌙" : "🌤️"}</span>
-        <button
           <button
             onClick={() => setDarkMode(!darkMode)}
             className={`relative w-10 h-5 rounded-full transition-colors outline-none focus:outline-none ${darkMode ? "bg-emerald-500" : "bg-zinc-300"}`}>
