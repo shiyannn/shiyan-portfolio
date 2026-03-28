@@ -28,7 +28,7 @@ export const data = {
     {
       year: "2022 – Present",
       degree: "Bachelor of Science in Information Technology",
-      school: "Nueva Caceres Foundation Inc. (NCF)",
+      school: "Naga College Foundation Inc. (NCF)",
       highlights: ["3rd Year College Student"],
     },
     {
