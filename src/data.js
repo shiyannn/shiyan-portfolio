@@ -59,7 +59,7 @@ export const data = {
    {
       name: "Savely-Byteme",
       description: "A personal budget and savings tracker app to help manage finances effectively.",
-      link: null,
+      link: "https://bytemesavely.vercel.app/",
       type: "mobile",
     },
   ],
